@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #ffffff;
+      --card: rgba(255,255,255,0.1);
+      --accent: #38bdf8;
+    }
+
+    body.light {
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --card: rgba(0,0,0,0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    nav a.active {
+      color: var(--accent);
+    }
+
+    .toggle {
+      cursor: pointer;
+    }
+
+    section {
+      padding: 100px 50px;
+      min-height: 100vh;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+    }
+
+    .hero span {
+      color: var(--accent);
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      color: #000;
+    }
+
+    .glass {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .skills .bar {
+      margin: 10px 0;
+    }
+
+    .bar div {
+      height: 8px;
+      background: var(--accent);
+      width: 0;
+      transition: 1s;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 20px;
+    }
+
+    .card {
+      padding: 20px;
+      border-radius: 10px;
+      background: var(--card);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.6s;
+    }
+
+    .fade.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width:768px){
+      header {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h3>Your Name</h3>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="toggle">🌙</div>
+</header>
+
+<section id="home" class="hero">
+  <h1>Hi, I'm <span>Your Name</span></h1>
+  <h2 id="typing"></h2>
+  <p>Building modern web experiences</p>
+  <button class="btn">View Work</button>
+</section>
+
+<section id="about" class="fade">
+  <h2>About Me</h2>
+  <div class="glass">
+    <p>I am a Software Developer and Project Manager passionate about building scalable applications and managing impactful projects.</p>
+  </div>
+</section>
+
+<section id="skills" class="skills fade">
+  <h2>Skills</h2>
+  <div class="bar">HTML<div style="width:90%"></div></div>
+  <div class="bar">CSS<div style="width:85%"></div></div>
+  <div class="bar">JavaScript<div style="width:80%"></div></div>
+  <div class="bar">React<div style="width:75%"></div></div>
+  <div class="bar">Python<div style="width:70%"></div></div>
+</section>
+
+<section id="projects" class="fade">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <h3>Portfolio Website</h3>
+      <p>Modern responsive portfolio</p>
+      <button class="btn">Demo</button>
+    </div>
+    <div class="card">
+      <h3>Task Manager</h3>
+      <p>Manage tasks efficiently</p>
+      <button class="btn">Demo</button>
+    </div>
+    <div class="card">
+      <h3>E-commerce UI</h3>
+      <p>Clean shopping experience</p>
+      <button class="btn">Demo</button>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="fade">
+  <h2>Contact</h2>
+  <form id="form">
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Message" required></textarea>
+    <button class="btn">Send</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 Your Name</p>
+  <p>LinkedIn | GitHub</p>
+</footer>
+
+<script>
+  // Typing Animation
+  const text = ["Software Developer", "Project Manager"];
+  let i=0,j=0,current="",isDeleting=false;
+  const typing=document.getElementById("typing");
+
+  function type(){
+    if(i<text.length){
+      if(!isDeleting && j<=text[i].length){
+        current=text[i].substring(0,j++);
+      } else if(isDeleting && j>=0){
+        current=text[i].substring(0,j--);
+      }
+
+      typing.textContent=current;
+
+      if(j==text[i].length) isDeleting=true;
+      if(j==0 && isDeleting){
+        isDeleting=false;
+        i++;
+      }
+    } else i=0;
+
+    setTimeout(type,100);
+  }
+  type();
+
+  // Scroll Active Link
+  const sections=document.querySelectorAll("section");
+  const navLinks=document.querySelectorAll("nav a");
+
+  window.addEventListener("scroll",()=>{
+    let current="";
+    sections.forEach(sec=>{
+      if(scrollY>=sec.offsetTop-100){
+        current=sec.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(a=>{
+      a.classList.remove("active");
+      if(a.getAttribute("href")==="#"+current){
+        a.classList.add("active");
+      }
+    });
+  });
+
+  // Fade Animation
+  const faders=document.querySelectorAll(".fade");
+  window.addEventListener("scroll",()=>{
+    faders.forEach(el=>{
+      const top=el.getBoundingClientRect().top;
+      if(top<window.innerHeight-50){
+        el.classList.add("show");
+      }
+    });
+  });
+
+  // Dark Mode Toggle
+  document.querySelector(".toggle").onclick=()=>{
+    document.body.classList.toggle("light");
+  };
+
+  // Form Validation
+  document.getElementById("form").addEventListener("submit",(e)=>{
+    e.preventDefault();
+    alert("Message Sent!");
+  });
+</script>
+
+</body>
+</html>
